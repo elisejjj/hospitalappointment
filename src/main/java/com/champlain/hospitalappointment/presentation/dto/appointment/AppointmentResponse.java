@@ -1,12 +1,17 @@
 package com.champlain.hospitalappointment.presentation.dto.appointment;
+
+import com.champlain.hospitalappointment.presentation.dto.doctor.DoctorResponse;
+import com.champlain.hospitalappointment.presentation.dto.patient.PatientResponse;
+
+import java.util.Date;
+
 public record AppointmentResponse(
         Long id,
         String subject,
-        String model,
-        String color,
-        String registrationNumber,
-        int modelYear,
+        Date date,
+        int duration,
         int price,
-        OwnerSummary owner
+        PatientResponse patient,
+        DoctorResponse doctor
 ) {
 }
