@@ -11,19 +11,17 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     boolean existsByRegistrationNumber(String registrationNumber);
     @Query("""
 SELECT c
-FROM Car c
-WHERE (:brand IS NULL OR LOWER(c.brand) LIKE LOWER(CONCAT('%', :brand, '%')))
-AND (:ownerId IS NULL OR c.owner.id = :ownerId)
-AND (:color IS NULL OR LOWER(c.color) = LOWER(:color))
-AND (:minPrice IS NULL OR c.price >= :minPrice)
-AND (:maxPrice IS NULL OR c.price <= :maxPrice)
-AND (:minYear IS NULL OR c.modelYear >= :minYear)
-AND (:maxYear IS NULL OR c.modelYear <= :maxYear)
-AND (:regPart IS NULL OR LOWER(c.registrationNumber) LIKE LOWER(CONCAT('%', :regPart, '%')))
+FROM Appointment c
+WHERE (:id IS NULL OR LOWER(c.brand) LIKE LOWER(CONCAT('%', :brand, '%')))
+AND (:patientId IS NULL OR c.patient.id = :patientId)
+AND (:doctorId IS NULL OR c.doctor.id = :doctorId)
+AND (:date IS NULL OR c.date = :date)
+AND (:subject IS NULL OR c.subject = LIKE LOWER(CONCAT('%', :subject, '%'))))
+AND (:duration IS NULL OR c.duration = :duration))
 """)
     List<Appointment> searchAll(
-            @Param("brand") String brand,
-            @Param("patientId") Long ownerId,
+            @Param("id") Long id,
+            @Param("patientId") Long patientId,
             @Param("doctorId") Long doctorId,
             @Param("date") Date date,
             @Param("subject") String subject,
