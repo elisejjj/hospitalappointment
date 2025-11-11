@@ -1,4 +1,4 @@
-package com.champsoft.cardatabasev2.DataAccessLayer;
+package com.champlain.hospitalappointment.dataaccess.repository;
 import com.champlain.hospitalappointment.dataaccess.entity.Appointment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
