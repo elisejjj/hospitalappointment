@@ -1,4 +1,9 @@
 package com.champlain.hospitalappointment.presentation.dto.doctor;
-
-public class DoctorResponse {
+public record DoctorResponse(
+        Long id,
+        String firstName,
+        String lastName,
+        String email,
+        String phone
+) {
 }
