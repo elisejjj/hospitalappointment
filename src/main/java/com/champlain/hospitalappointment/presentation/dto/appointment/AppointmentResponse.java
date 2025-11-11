@@ -10,7 +10,6 @@ public record AppointmentResponse(
         String subject,
         Date date,
         int duration,
-        int price,
         PatientResponse patient,
         DoctorResponse doctor
 ) {
