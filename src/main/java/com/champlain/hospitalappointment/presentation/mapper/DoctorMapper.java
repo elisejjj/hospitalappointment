@@ -24,10 +24,7 @@ public final class DoctorMapper {
                 doctor.getFirstName(),
                 doctor.getLastName(),
                 doctor.getEmail(),
-                doctor.getPhone(),63
-                doctor.getCreatedAt(),
-                doctor.getUpdatedAt(),
-                count
+                doctor.getPhone()
         );
     }
 }
