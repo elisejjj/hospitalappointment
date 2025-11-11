@@ -7,6 +7,7 @@ import com.champlain.hospitalappointment.presentation.dto.appointment.Appointmen
 import com.champlain.hospitalappointment.presentation.dto.appointment.AppointmentResponse;
 import com.champlain.hospitalappointment.presentation.dto.doctor.DoctorResponse;
 import com.champlain.hospitalappointment.presentation.dto.patient.PatientResponse;
+import com.champlain.hospitalappointment.dataaccess.repository.AppointmentRepository;
 import javax.print.Doc;
 
 public final class AppointmentMapper {
