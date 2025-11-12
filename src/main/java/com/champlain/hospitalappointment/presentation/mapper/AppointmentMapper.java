@@ -15,7 +15,6 @@ public final class AppointmentMapper {
     }
     public static Appointment toEntity(AppointmentRequest req, Doctor doctor, Patient patient) {
         return Appointment.builder()
-                .id(req.id())
                 .date(req.date())
                 .subject(req.subject())
                 .duration(req.duration())
