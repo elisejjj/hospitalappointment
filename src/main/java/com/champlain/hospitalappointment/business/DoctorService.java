@@ -23,9 +23,9 @@ import java.util.List;
     public class DoctorService {
 
     private final DoctorRepository doctorRepository;
-    private final appointmentRepository appointmentRepository
+    private final AppointmentRepository appointmentRepository;
 
-public DoctorService(DoctorRepository doctorRepository, AppointmentReposoitory appointmentReposoitory){
+public DoctorService(DoctorRepository doctorRepository, AppointmentRepository appointmentReposoitory){
         this.doctorRepository = doctorRepository;
         this.appointmentRepository = appointmentReposoitory;
 
