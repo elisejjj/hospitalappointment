@@ -20,18 +20,25 @@ repositories {
 	mavenCentral()
 }
 dependencies {
-// --- Core Starters ---
+	// --- Core Starters ---
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-// --- Utilities ---
+
+	// --- Add this line 👇 ---
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
+	// --- Utilities ---
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-// --- Database ---
+
+	// --- Database ---
 	runtimeOnly 'com.h2database:h2'
-// --- Optional DevTools & Monitoring ---
+
+	// --- Optional DevTools & Monitoring ---
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-// --- Tests ---
+
+	// --- Tests ---
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }

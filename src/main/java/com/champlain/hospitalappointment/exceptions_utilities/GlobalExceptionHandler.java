@@ -1,7 +1,5 @@
 package com.champlain.hospitalappointment.exceptions_utilities;
 
-
-import com.champlain.hospitalappointment.dataaccess.repository.PatientRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
@@ -13,71 +11,35 @@ import java.util.Map;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    // -------------------- 404: Not Found --------------------
+
+    // ---------- 404 NOT FOUND ----------
     @ExceptionHandler(AppointmentNotFoundException.class)
-    public ResponseEntity<ProblemDetail> handleCarNotFound(AppointmentNotFoundException ex) {
-        ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
-        pd.setTitle("Appointment not found");
-        pd.setDetail(ex.getMessage());
-        pd.setProperty("errors", List.of(Map.of("field", "id", "message", ex.getLocalizedMessage())));
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(pd);
+    public ResponseEntity<ProblemDetail> handleAppointmentNotFound(AppointmentNotFoundException ex) {
+        return buildProblem(HttpStatus.NOT_FOUND, "Appointment Not Found", ex.getMessage(), "appointmentId");
     }
 
     @ExceptionHandler(DoctorNotFoundException.class)
     public ResponseEntity<ProblemDetail> handleDoctorNotFound(DoctorNotFoundException ex) {
-        ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
-        pd.setTitle("Doctor Not Found");
-        pd.setDetail(ex.getMessage());
-        pd.setProperty("errors", List.of(Map.of("field", "DoctorID", "message", ex.getLocalizedMessage())));
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(pd);
-
+        return buildProblem(HttpStatus.NOT_FOUND, "Doctor Not Found", ex.getMessage(), "doctorId");
     }
-
 
     @ExceptionHandler(PatientNotFoundException.class)
     public ResponseEntity<ProblemDetail> handlePatientNotFound(PatientNotFoundException ex) {
-        ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.NOT_FOUND);
-        pd.setTitle("Patient Not Found");
-        pd.setDetail(ex.getMessage());
-        pd.setProperty("errors", List.of(Map.of("field", "PatientID", "message", ex.getLocalizedMessage())));
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(pd);
-
+        return buildProblem(HttpStatus.NOT_FOUND, "Patient Not Found", ex.getMessage(), "patientId");
     }
 
-
-    // ------------- 400: Bad Request (validation & parsing) -------------
+    // ---------- 400 BAD REQUEST ----------
     @ExceptionHandler(DuplicateResourceException.class)
     public ResponseEntity<ProblemDetail> handleDuplicate(DuplicateResourceException ex) {
-        ProblemDetail pd = ProblemDetail.forStatus(HttpStatus.BAD_REQUEST);
-        pd.setTitle("Duplicate Resource");
-        pd.setDetail(ex.getMessage());
-        pd.setProperty("errors", List.of(Map.of(
-                "field", "duplicate",
-                "message", ex.getLocalizedMessage()
-        )));
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(pd);
-
-        if (PatientRepository.existsByEmailIgnoreCase(req.getEmail())) {
-            throw new DuplicateResourceException("A patient with this email already exists.");
-        }
-
-
+        return buildProblem(HttpStatus.BAD_REQUEST, "Duplicate Resource", ex.getMessage(), "duplicate");
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // ---------- Helper ----------
+    private ResponseEntity<ProblemDetail> buildProblem(HttpStatus status, String title, String message, String field) {
+        ProblemDetail pd = ProblemDetail.forStatus(status);
+        pd.setTitle(title);
+        pd.setDetail(message);
+        pd.setProperty("errors", List.of(Map.of("field", field, "message", message)));
+        return ResponseEntity.status(status).body(pd);
+    }
 }
