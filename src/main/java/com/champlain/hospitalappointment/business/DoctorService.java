@@ -21,9 +21,9 @@ import java.util.List;
     public class DoctorService {
 
     private final DoctorRepository doctorRepository;
-    private final appointmentRepository appointmentRepository
+    private final AppointmentRepository appointmentRepository;
 
-public DoctorService(DoctorRepository doctorRepository, AppointmentReposoitory appointmentReposoitory){
+public DoctorService(DoctorRepository doctorRepository, AppointmentRepository appointmentReposoitory){
         this.doctorRepository = doctorRepository;
         this.appointmentRepository = appointmentReposoitory;
 
@@ -78,11 +78,11 @@ public DoctorResponse getById(Long id) {
     @Transactional
 public void delete(Long id){
     Doctor doctor = doctorRepository.findById(id)
-            .orElseThrow (() -> new DoctorNotFoundExceotion(id));
+            .orElseThrow (() -> new DoctorNotFoundException(id));
     doctorRepository.delete(doctor);
     }
 
-//this helps to get all the appoinments by the doctor :)
+//this helps to get all the appointments by the doctor :)
     @Transactional(readOnly = true)
     public List<AppointmentResponse> getAppointmentsByDoctor(Long doctorId) {
         Doctor doctor = doctorRepository.findById(doctorId)
@@ -91,7 +91,13 @@ public void delete(Long id){
         return appointmentRepository.findAll().stream()
                 .filter(a -> a.getDoctor() != null && a.getDoctor().getId().equals(doctorId))
                 .map(AppointmentMapper::toResponse).toList();
+    }
 
+        @Transactional(readOnly = true)
+        public Doctor getEntityById(Long id) {
+            return doctorRepository.findById(id)
+                    .orElseThrow(() -> new DoctorNotFoundException(id));
+        }
 
 
 }

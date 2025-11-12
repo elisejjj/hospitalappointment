@@ -97,5 +97,11 @@ public class PatientService {
                 .map(AppointmentMapper::toResponse).toList();
     }
 
+    @Transactional(readOnly = true)
+    public Patient getEntityById(Long id) {
+        return patientRepository.findById(id)
+                .orElseThrow(() -> new PatientNotFoundException(id));
+    }
+
 
 }
