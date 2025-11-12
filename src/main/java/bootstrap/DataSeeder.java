@@ -41,7 +41,7 @@ public class DataSeeder {
                         null,
                         Timestamp.valueOf(LocalDateTime.now().plusDays(1)),
                         "General Check-up", 30, doctor1, patient1, null, null
-                )
+                );
 
                 Appointment a2 = new Appointment(
                         null, Timestamp.valueOf(LocalDateTime.now().plusDays(3)), "Follow-up Consultation", 45, doctor1,
