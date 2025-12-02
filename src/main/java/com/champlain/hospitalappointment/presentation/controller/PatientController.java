@@ -14,6 +14,8 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/patients")
+@CrossOrigin(origins = "http://localhost:3000")
+
 @Validated
 public class PatientController {
 

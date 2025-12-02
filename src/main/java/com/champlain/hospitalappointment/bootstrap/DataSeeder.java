@@ -1,4 +1,4 @@
-package bootstrap;
+package com.champlain.hospitalappointment.bootstrap;
 
 
 import com.champlain.hospitalappointment.dataaccess.entity.Doctor;
@@ -14,8 +14,8 @@ import org.springframework.context.annotation.Configuration;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-@Configuration
-public class DataSeeder {
+//@Configuration
+public class  DataSeeder {
 
     @Bean
     CommandLineRunner loadData(DoctorRepository doctorRepo,

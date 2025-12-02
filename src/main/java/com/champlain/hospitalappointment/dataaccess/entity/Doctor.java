@@ -36,6 +36,13 @@ public class Doctor {
     private Instant updatedAt;
     // Keep the OneToMany simple. No cascade, no orphanRemoval.
 // Manage the association from Car.owner (@ManyToOne) side.
-    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
+    @OneToMany(
+            mappedBy = "doctor",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
     private List<Appointment> appointments = new ArrayList<>();
+
+
 }
